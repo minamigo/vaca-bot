@@ -355,4 +355,4 @@ setInterval(async () => {
     }
   }
 },5 * 60 * 1000);
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN).catch(err => console.error("Login failed:", err));
