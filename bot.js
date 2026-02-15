@@ -349,20 +349,17 @@ setInterval(async () => {
 
 // -------- BOT LOGIN --------
 
-client.once("ready", async () => {
-  console.log(`✅ Logged in as ${client.user.tag}`);
-
-  try {
-    console.log("🔁 Registering slash commands...");
-    await rest.put(Routes.applicationCommands(APP_ID), { body: commands });
-    console.log("✅ Slash commands registered!");
-  } catch (err) {
-    console.error("Slash command error:", err);
-  }
-});
-
 console.log("Attempting login...");
+console.log("Token exists?", !!process.env.TOKEN);
+console.log("Token length:", process.env.TOKEN?.length);
 
 client.login(process.env.TOKEN)
-  .then(() => console.log("Login request sent to Discord"))
-  .catch(err => console.error("❌ Login failed:", err));
+  .then(() => {
+    console.log("✅ Login promise resolved");
+  })
+  .catch(err => {
+    console.error("❌ Login failed:", err);
+  });
+
+client.on("error", console.error);
+client.on("shardError", console.error);
