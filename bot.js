@@ -97,7 +97,7 @@ const commands = [
 ].map(cmd => cmd.toJSON());
 
 // --- REGISTER COMMANDS ---
-const APP_ID = "1416075948104876233";
+const APP_ID = "1467102902811230416";
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
