@@ -345,6 +345,9 @@ setInterval(async () => {
     }
   }
 },5 * 60 * 1000);
+
+// -------- BOT LOGIN --------
+
 client.once("ready", async () => {
   console.log(`✅ Logged in as ${client.user.tag}`);
 
@@ -357,5 +360,8 @@ client.once("ready", async () => {
   }
 });
 
+console.log("Attempting login...");
+
 client.login(process.env.TOKEN)
+  .then(() => console.log("Login request sent to Discord"))
   .catch(err => console.error("❌ Login failed:", err));
