@@ -100,16 +100,6 @@ const APP_ID = "1416075948104876233";
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
-(async () => {
-  try {
-    console.log("🔁 Registering slash commands...");
-    await rest.put(Routes.applicationCommands(APP_ID), { body: commands });
-    console.log("✅ Slash commands registered!");
-  } catch (err) {
-    console.error(err);
-  }
-})();
-
 // -------------- INTERACTION HANDLER --------------
 client.on("interactionCreate", async interaction => {
   if (!interaction.isChatInputCommand()) return;
@@ -355,8 +345,17 @@ setInterval(async () => {
     }
   }
 },5 * 60 * 1000);
-console.log("TOKEN exists?", !!process.env.TOKEN);
-console.log("TOKEN length:", process.env.TOKEN?.length);
+client.once("ready", async () => {
+  console.log(`✅ Logged in as ${client.user.tag}`);
+
+  try {
+    console.log("🔁 Registering slash commands...");
+    await rest.put(Routes.applicationCommands(APP_ID), { body: commands });
+    console.log("✅ Slash commands registered!");
+  } catch (err) {
+    console.error("Slash command error:", err);
+  }
+});
+
 client.login(process.env.TOKEN)
-  .then(() => console.log(`✅ Logged in as ${client.user.tag}`))
   .catch(err => console.error("❌ Login failed:", err));
