@@ -355,4 +355,8 @@ setInterval(async () => {
     }
   }
 },5 * 60 * 1000);
-client.login(process.env.TOKEN).catch(err => console.error("Login failed:", err));
+console.log("TOKEN exists?", !!process.env.TOKEN);
+console.log("TOKEN length:", process.env.TOKEN?.length);
+client.login(process.env.TOKEN)
+  .then(() => console.log(`✅ Logged in as ${client.user.tag}`))
+  .catch(err => console.error("❌ Login failed:", err));
