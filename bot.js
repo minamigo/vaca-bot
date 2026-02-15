@@ -1,3 +1,4 @@
+console.log("🔥 BOT FILE STARTED");
 const {
   Client,
   GatewayIntentBits,
